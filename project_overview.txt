@@ -1,0 +1,63 @@
+Index Tracking and Forward Testing (Finance)
+-->Performed an explanatory data analysis and analyze and compared the 30 Dow Jones index stocks in terms of performance risk and return
+-->Tracked the Dow Jones index as closely as possible with subset of only 10 stocks
+-->Tried to find an optimal tracking portfolio
+-->After optimized and fitted a tracking portfolio that closely tracks the Dow Jones index on past data, followed test strategy and evaluated whether portfolio closely tracks the index on new data as well
+
+-->Transformed the data as required
+    -->converted absolute prices to relative prices
+    -->since all stocks are actually starting at different price level
+    -->prices are not really meaningful if want to determine whether stock performs well or not
+    -->normalized all stocks to a common based value for instance 100
+    -->calculated daily returns with the percentage change method, it returned percentage change in prices
+    -->created a user define function named summary_ann
+        -dataframe can be passed with daily returns
+        -it automatically calculates mean average daily return and standard deviation
+        -then, annualizing the mean and also the standard deviation
+        -multiplied mean with 252 (average 252 trading days in a year) and store it in new column named return (annualized mean or average return)
+        -column named risk which is actually the annualized the standard deviation of daily returns
+        -drop columns named mean and std
+    -->it is helpful to get corresponding company names - ticker symbols
+        -probably for each and every ticker symbol, comapny name is not known
+        -create a left join, left dataframe is summary data frame and from more_info dataframe, we can get ticker symbol and company name
+        -set company column which contains company name as index
+        -lastly, there wasn't any company name for dow jones index, rename index label NaN and replace by Dow Jones
+-->Performed explanatory data analysis to compare historical performance of stocks and the performance typically means risk and return
+    -created bar graph and scatter plot to visualize the performance of stocks based on risk and return
+    -calculated correlation between the stocks based on returns rather than stock prices
+    -visualized calculated correlation using seaborne heat map
+-->Performed index tracking on tracking portfolio of only 10 stocks
+    -selected 10 stocks with the lowest individual Tracking error
+    -identified portfolio that best tracks the index in a training period and fitted the parameters of portfolio to the data in the training period
+     -further tested ability of tracking portfolio on testing period
+     -selected normalized prices for the training period as well as daily returns
+     -created a matrix that allows to measure how well a stock or portfolio tracks an index
+     -calculated individual stock's tracking error
+-->Selected tracking stocks on the basis of lowest tracking error
+    - calculated mean and standard deviation of return differences and annualized with user defined function named tracking_ann
+    -visualized normalized prices of 10 stocks and dow jones index (Line Plot)
+-->Index tracking with simple tracking portfolio
+    -created a simple tracking portfolio (equal weighted portfolio with 10 stocks)
+    -calculated daily returns for equally weighted portfolio
+    -defined a function to calculate portfolio returns for portfolios based on weights by using dot method
+    -defined a function to minimize tracking error of tracking portfolio which return annualized tracking error
+    -calculated cumulative investment multiple for each and every time stamp
+    -compared Dow jones index with frist tracking portfolio by visualizing it with Line Plot
+-->Found the optimal tracking portfolio that minimized tracking error by optimizing the rates
+    -Implemented quadratic optimization algorithm to find optimal weights for 10 stocks
+-->Performed Forward Testing
+    -created two user defined functions for following operations:
+        -automated and scaled the process of calculating tracking errors
+        -visualized tracking portfolios and index
+    -performed both back testing as well as forward testing
+    -compared tracking portfolio with random portfolio to check if tracking portfolio tracks the index better than vast majority of random portfolios
+        -calculated tracking error for random portfolios in the year 2019
+        -helped to indicate if the method used to create tracking portfolio is valid and work with new data
+        -created 10000 random portfolios and calculated 10000 tracking errors
+       -visualized distribution of 10000 tracking errors using histogram
+Python Libraries used in the project:
+-->pandas
+-->matplotlib.pyplot
+-->numpy
+-->seaborn
+-->scipy.optimize
